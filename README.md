@@ -137,7 +137,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```console
   $ docker run -d --name mongodb \
-    --net parse-dashboard-tier \
+    --net parse_dashboard-tier \
     --volume /path/to/mongodb-persistence:/bitnami \
     bitnami/mongodb:latest
   ```
@@ -148,7 +148,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
   ```console
   $ docker run -d -name parse -p 1337:1337 \
-    --net parse-dashboard-tier
+    --net parse_dashboard-tier
     --volume /path/to/parse-persistence:/bitnami \
     bitnami/parse:latest
   ```
