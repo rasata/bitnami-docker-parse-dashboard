@@ -1,13 +1,16 @@
+# Parse Dashboard packaged by Bitnami
 
-# What is Parse Dashboard?
+## What is Parse Dashboard?
 
-> Parse Dashboard is a standalone dashboard for managing your Parse apps. You can use it to manage your Parse Server apps and your apps that are running on Parse.com.
+> Parse Dashboard is a standalone dashboard for managing your Parse apps. You can use it to manage your Parse Server apps.
 
-http://www.parse.com/
+[Overview of Parse Dashboard](http://parseplatform.org/)
 
-# TL;DR
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## Docker Compose
+## TL;DR
+
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse-dashboard/master/docker-compose.yml > docker-compose.yml
@@ -16,7 +19,7 @@ $ docker-compose up -d
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -28,26 +31,26 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/parse-dashboard?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.1.0`, `2.1.0-debian-10-r332`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.1.0-debian-10-r332/2/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.3.0`, `3.3.0-debian-10-r20`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/3.3.0-debian-10-r20/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
-# Prerequisites
+## Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
 
-# How to use this image
+## How to use this image
 
-### Run the application using Docker Compose
+#### Run the application using Docker Compose
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
@@ -56,7 +59,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse-dashb
 $ docker-compose up -d
 ```
 
-### Run the application manually
+#### Run the application manually
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
@@ -86,9 +89,9 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
   ```
 
-Then you can access your application at http://your-ip/
+Then you can access your application at `http://your-ip/`
 
-## Persisting your application
+### Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -98,7 +101,7 @@ The above examples define docker volumes namely `mongodb_data`, `parse_data` and
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount host directories as data volumes with Docker Compose
+#### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/master/docker-compose.yml) file present in this repository:
 
@@ -123,7 +126,7 @@ services:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-### Mount host directories as data volumes using the Docker command line
+#### Mount host directories as data volumes using the Docker command line
 
 In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
 
@@ -161,7 +164,7 @@ In this case you need to specify the directories to mount on the run command. Th
   bitnami/parse-dashboard:latest
   ```
 
-# Upgrade this application
+## Upgrade this application
 
 Bitnami provides up-to-date versions of Parse Dashboard, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse Dashboard container.
 
@@ -196,9 +199,9 @@ You can use these snapshots to restore the application state should the upgrade 
  * For docker-compose: `$ docker-compose up parse-dashboard`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name parse-dashboard bitnami/parse-dashboard:latest`
 
-# Configuration
+## Configuration
 
-## Environment variables
+### Environment variables
 
 When you start the parse-dashboard image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -219,28 +222,40 @@ parse-dashboard:
  $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami --network=parse_dashboard-tier bitnami/parse-dashboard
 ```
 
-Available variables:
- - `PARSE_DASHBOARD_USER`: Parse Dashboard application username. Default: **user**
- - `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard application password. Default: **bitnami**
- - `PARSE_HOST`: Host used by Parse Dashboard to form the URLs to Parse Server.
- - `PARSE_PROTOCOL`: Protocol used by Parse Dashboard to form the URLs to Parse Server. Default: **http**
- - `PARSE_USE_HOSTNAME`: Whether to use a hostname or an IP to configure the "serverURL" setting. Default: **no**
- - `PARSE_PORT_NUMBER`: Parse Server Port. Default: **1337**
- - `PARSE_APP_ID`: Parse Server App Id. Default: **myappID**
- - `PARSE_MASTER_KEY`: Parse Server Master Key. Default: **mymasterKey**
- - `PARSE_DASHBOARD_APP_NAME`: Parse Dashboard application name. Default: **MyDashboard**
+Available environment variables:
 
-# Notable Changes
+###### User and Site configuration
 
-## 1.2.0-r69
+- `PARSE_DASHBOARD_ENABLE_HTTPS`: Whether to enable HTTPS for Parse Dashboard by default. Default: **no**
+- `PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER`: External HTTP port for Parse Dashboard. Default: **80**
+- `PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER`: External HTTPS port for Parse Dashboard. Default: **80**
+- `PARSE_DASHBOARD_PARSE_HOST`: Parse server host. Default: **parse**
+- `PARSE_DASHBOARD_PORT_NUMBER`: Port number in which Parse Dashboard will run. Default: **4040**
+- `PARSE_DASHBOARD_PARSE_PORT_NUMBER`: Parse server port number. Default: **1337**
+- `PARSE_DASHBOARD_PARSE_APP_ID`: Parse app ID. Default: **myappID**
+- `PARSE_DASHBOARD_PARSE_APP_NAME`: Parse app name. Default: **myappID**
+- `PARSE_DASHBOARD_PARSE_MASTER_KEY`: Parse master key: **mymasterKey**
+- `PARSE_DASHBOARD_PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
+- `PARSE_DASHBOARD_PARSE_PROTOCOL`: Parse server protocol. Default: **https**
+- `PARSE_DASHBOARD_USERNAME`: Parse Dashboard user name. Default: **user**
+- `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard password. Default: **bitnami**
+
+## Notable Changes
+
+### 2.1.0-debian-10-r328
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+
+### 1.2.0-r69
 
 - The Parse Dashboard container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse Dashboard daemon was started as the `parsedashboard` user. From now on, both the container and the Parse Dashboard daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-parse-dashboard/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-parse-dashboard/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-parse-dashboard/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -250,9 +265,9 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_APP_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
-Copyright 2016-2021 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
